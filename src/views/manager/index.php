@@ -31,6 +31,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'is_works:boolean',
             [
                 'class' => yii\grid\ActionColumn::class,
+                'template' => '{requests}',
+                'buttons' => [
+                    'requests' => function ($url) {
+                        return Html::a('Заявки', $url, [
+                            'class' => 'btn btn-success',
+                        ]);
+                    },
+                ],
+                'contentOptions' => ['style' => 'width:1px'],
+            ],
+            [
+                'class' => yii\grid\ActionColumn::class,
                 'template' => '{view}',
                 'buttons' => [
                     'view' => function ($url) {

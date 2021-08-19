@@ -18,6 +18,9 @@ use yii\db\Expression;
  */
 class Request extends \yii\db\ActiveRecord
 {
+
+    public $previousRequest;
+
     public static function tableName()
     {
         return 'requests';
@@ -55,6 +58,7 @@ class Request extends \yii\db\ActiveRecord
             'phone' => 'Номер телефона',
             'manager_id' => 'Ответственный менеджер',
             'text' => 'Текст заявки',
+            'previousRequest' => 'Предыдущая заявка'
         ];
     }
 

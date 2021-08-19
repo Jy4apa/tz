@@ -54,6 +54,11 @@ class ManagerController extends Controller
         ]);
     }
 
+    public function actionRequests($id)
+    {
+        return $this->redirect(['request/index', 'manager_id' => $id]);
+    }
+
     protected function findModel($id)
     {
         if (($model = Manager::findOne($id)) !== null) {

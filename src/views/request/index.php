@@ -39,6 +39,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
+                'attribute' => 'previousRequest',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    $duplicates = Request::find()->where(['email' => $model->email])
+                        ->orWhere(['phone' => $model->phone]);
+                    $duplicates = $duplicates->andFilterWhere(['not', ['id' => $model->id]])
+                        ->andFilterWhere(['<', 'created_at', $model->created_at])
+                        ->orderBy(['id' => SORT_DESC])->one();
+                    if ($duplicates && (strtotime($model->created_at) - strtotime($duplicates->created_at)) < 2592000) {
+                        return Html::a('№ ' . $duplicates->id,
+                            'view?id=' . $duplicates->id);
+                    }
+                    else return '---';
+                }
+            ],
+            [
                 'class' => yii\grid\ActionColumn::class,
                 'template' => '{view}',
                 'buttons' => [

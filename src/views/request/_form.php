@@ -17,7 +17,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'manager_id')->dropDownList(Manager::getList(), ['prompt' => '']) ?>
+    <?php if ($model->id): ?>
+    <fieldset disabled="disabled">
+        <?php endif; ?>
+
+        <?= $form->field($model, 'manager_id')->dropDownList(Manager::getList(), ['prompt' => '']) ?>
+
+        <?php if ($model->id): ?>
+    </fieldset>
+    <?php endif; ?>
 
     <?= $form->field($model, 'text')->textarea(['rows' => 10]) ?>
 

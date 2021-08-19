@@ -38,6 +38,11 @@ class Manager extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getRequests()
+    {
+        return $this->hasMany(Request::className(), ['manager_id' => 'id']);
+    }
+
     public function attributeLabels()
     {
         return [
